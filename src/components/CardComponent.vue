@@ -5,13 +5,15 @@ export default {
     return {
     }
   },
-  components:{
-  }
 }
 
 </script>
 
 <template>
+
+	<div>
+		
+	</div>
   
 </template>
 
