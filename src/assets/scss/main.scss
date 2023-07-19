@@ -1,2 +1,5 @@
 @use './SingleStylingFiles/mixins' as *;
 
+@tailwind base;
+@tailwind components;
+@tailwind utilities;

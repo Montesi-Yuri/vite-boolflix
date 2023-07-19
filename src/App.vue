@@ -1,28 +1,35 @@
 <script>
-import Component1 from './components/Component1.vue'
+import HeaderComponent from './components/HeaderComponent.vue';
+import MainComponent from './components/MainComponent.vue';
+import CardComponent from './components/CardComponent.vue';
 
 export default {
-  data() {
-    return {
-    }
-  },
-  components:{
-    Component1
-  }
+	data() {
+		return {
+		}
+	},
+	components:{
+		HeaderComponent,
+		MainComponent,
+		CardComponent
+	}
 }
 
 </script>
 
 <template>
 
-  <header>
-  </header>
+	<HeaderComponent>
 
-  <main>
-  </main>
+	</HeaderComponent>
 
-  <footer>
-  </footer>
+	<MainComponent>
+
+		<CardComponent>
+		
+		</CardComponent>
+
+	</MainComponent>
 
 </template>
 
