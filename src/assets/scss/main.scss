@@ -1,3 +1,6 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 *{
     margin: 0 auto;
@@ -9,4 +12,14 @@
             list-style: none;
         }
     }
+}
+
+
+.btn{
+    padding: 5px 10px;
+    font-weight: 500;
+    color: white;
+    border-radius: 12px;
+    background-color: red;
+    margin: 0 5px;
 }

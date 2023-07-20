@@ -25,6 +25,14 @@ export default {
 				console.log('entrato in maggiore di 5')
 			}
 			return vote;
+		},
+		showInfo(id){
+			store.displayInfo = id;
+
+		},
+		hideInfo(){
+			store.displayInfo = '';
+
 		}
 	}
 }
@@ -37,9 +45,10 @@ export default {
 
 			<div>
 				<h3>Series</h3>
-				<template  v-for="movie in store.searchResult.movies">
+				<template  v-for="(movie, i) in store.searchResult.movies" :key="i">
 
-					<CardComponent
+					<CardComponent @mouseenter="showInfo(movie.id)" @mouseleave="hideInfo()"
+					:id="movie.id"
 					:title="movie.title"
 					:originalTitle="movie.original_title"
 					:lang="movie.original_language"
@@ -54,7 +63,7 @@ export default {
 				<h3>Movies</h3>
 				<template  v-for="serie in store.searchResult.series">
 
-					<CardComponent
+					<CardComponent @mouseenter="showInfo(serie.id)" @mouseleave="hideInfo()"
 					:title="serie.name"
 					:originalTitle="serie.original_name"
 					:lang="serie.original_language"

@@ -38,12 +38,9 @@ export default {
 
 <template>
 
-
 	<HeaderComponent @searchMovie="searchContent()"></HeaderComponent>
 
 	<MainComponent></MainComponent>
-
-	
 
 </template>
 
