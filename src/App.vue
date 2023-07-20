@@ -13,16 +13,16 @@ export default {
 	},
 	components:{
 		HeaderComponent,
-		MainComponent,
+		MainComponent
 	},
 	methods:{
 		searchContent(){
 			console.log('user input', store.userSearchInput)
 			axios.get(`https://api.themoviedb.org/3/search/movie?api_key=5c7e8182494749b2f74b1f98b20d6a99&query=${store.userSearchInput}`)
 			.then(response => {
-				store.searchResult = response.data;
-				console.log(store.searchResult);
-				store.userSearchInput = ''
+				store.searchResult = response.data.results;
+				console.log('risultato api', store.searchResult);
+				store.userSearchInput = '';
 		});
 		}
 	}
@@ -32,13 +32,25 @@ export default {
 
 <template>
 
-	<HeaderComponent @searchMovie="searchContent()">
 
-	</HeaderComponent>
+<header>
+	<section>
+		<h1>Boolflix</h1>
+	</section>
+	<section>
 
-	<MainComponent>
+		<input type="text" v-model="store.userSearchInput">
+		<button @click="searchContent()">
+			Search
+		</button>
+		
+	</section>
+</header>
 
-	</MainComponent>
+<MainComponent>
+</MainComponent>
+
+	
 
 </template>
 

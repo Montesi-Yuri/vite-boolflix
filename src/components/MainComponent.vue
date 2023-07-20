@@ -1,9 +1,12 @@
 <script>
 import CardComponent from '../components/CardComponent.vue';
 
+import { store } from '../store.js';
+
 export default {
   data() {
     return {
+		store
     }
   },
   components:{
@@ -15,13 +18,21 @@ export default {
 
 <template>
 	<div class="container">
-
 		<div class="cards-container">
-			<CardComponent>
-			</CardComponent>
-		</div>
+			<template  v-for="(item, i) in store.searchResult" :key="i">
 
-	</div>
+				<CardComponent
+				:title="item.title"
+				:originalTitle="item.original_title"
+				:lang="item.original_language"
+				:rankingVote="item.vote_average">
+
+				</CardComponent>
+				
+			</template>
+			
+		</div>
+</div>
 	
 </template>
 
@@ -30,5 +41,9 @@ export default {
 .cards-container{
 	display: flex;
 	flex-wrap: wrap;
+
+	.single-card{
+		width: 300px;
+	}
 }
 </style>
