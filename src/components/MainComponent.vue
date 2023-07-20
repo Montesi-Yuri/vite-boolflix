@@ -39,38 +39,38 @@ export default {
 
 <template>
 
-	<TrendingComponent></TrendingComponent>
+	<TrendingComponent v-show="store.searchResult.movies == '' "></TrendingComponent>
 
-		<!-- <div>
-				<template  v-for="(movie, i) in store.searchResult.movies" :key="i">
+	<div class="flex flex-wrap px-10">
+		<div v-for="(movie, i) in store.searchResult.movies" :key="i">
 
-					<CardComponent @mouseenter="showInfo(movie.id)" @mouseleave="hideInfo()"
-					:id="movie.id"
-					:title="movie.title"
-					:overview="movie.overview"
-					:lang="movie.original_language"
-					:rankingVote="voteAdjust(movie.vote_average)"
-					:imgUrl="movie.poster_path"
-					:starQty="voteAdjust(movie.vote_average)">
-					</CardComponent>
-					
-				</template>
-			</div>
-			<div>
-				<template  v-for="serie in store.searchResult.series">
+			<CardComponent @mouseenter="showInfo(movie.id)" @mouseleave="hideInfo()"
+			:id="movie.id"
+			:title="movie.title"
+			:overview="movie.overview"
+			:lang="movie.original_language"
+			:rankingVote="voteAdjust(movie.vote_average)"
+			:imgUrl="movie.poster_path"
+			:starQty="voteAdjust(movie.vote_average)">
+			</CardComponent>
+			
+		</div>
+	</div>
+	<div class="flex flex-wrap px-10">
+		<div v-for="serie in store.searchResult.series">
 
-					<CardComponent @mouseenter="showInfo(serie.id)" @mouseleave="hideInfo()"
-					:id="serie.id"
-					:title="serie.name"
-					:overview="serie.overview"
-					:lang="serie.original_language"
-					:rankingVote="voteAdjust(serie.vote_average)"
-					:imgUrl="serie.poster_path"
-					:starQty="voteAdjust(serie.vote_average)">
-					</CardComponent>
+			<CardComponent @mouseenter="showInfo(serie.id)" @mouseleave="hideInfo()"
+			:id="serie.id"
+			:title="serie.name"
+			:overview="serie.overview"
+			:lang="serie.original_language"
+			:rankingVote="voteAdjust(serie.vote_average)"
+			:imgUrl="serie.poster_path"
+			:starQty="voteAdjust(serie.vote_average)">
+			</CardComponent>
 
-				</template>
-			</div> -->
+		</div>
+	</div>
 			 
 	
 </template>

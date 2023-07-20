@@ -94,11 +94,13 @@ export default {
 @use '../assets/scss/main.scss' as *;
 .single-card{
 	width: 300px;
+	height: calc(100% - 20px);
 	position: relative;
 	margin: 10px 10px;
 	
 	img{
-		
+		height: 100%;
+		display: block;
 	}
 
 	.card-info{

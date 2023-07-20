@@ -48,17 +48,15 @@ export default{
 </script>
 
 <template>
-    <div class="container mb-30">
+    <div class="px-10 pb-10">
         <h2 class="text-red-500 text-center text-2xl">
             Trending Now
         </h2>
-        <h3 class="text-white text-2xl">
+        <h3 class="text-white text-2xl pt-8">
                 Movies
             </h3>
         <div class="movies">
-            
             <div v-for="(movie, i) in store.trending.movies" :key="i">
-                
                 <CardComponent @mouseenter="showInfo(movie.id)" @mouseleave="hideInfo()"
                 :id="movie.id"
                 :title="movie.title"
@@ -68,16 +66,13 @@ export default{
                 :imgUrl="movie.poster_path"
                 :starQty="voteAdjust(movie.vote_average)">
                 </CardComponent>
-                    
             </div>
         </div>
-        <h3 class="text-white text-2xl">
+        <h3 class="text-white text-2xl pt-8">
                 Series
             </h3>
         <div class="series">
-            
             <div v-for="serie in store.trending.series">
-
                 <CardComponent @mouseenter="showInfo(serie.id)" @mouseleave="hideInfo()"
                 :id="serie.id"
                 :title="serie.name"
@@ -87,7 +82,6 @@ export default{
                 :imgUrl="serie.poster_path"
                 :starQty="voteAdjust(serie.vote_average)">
                 </CardComponent>
-
             </div>
         </div>
     </div>
@@ -100,7 +94,7 @@ export default{
 .movies, .series{
     display: flex;
     overflow-x: auto;
-    margin-bottom: 40px;
+    margin: 10px 0;
     
     h3{
         width: 100%;
