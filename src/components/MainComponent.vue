@@ -15,12 +15,16 @@ export default {
 		
 	},
 	methods:{
-		voteAdjust(){
-			
-			for (let i = 0; i < store.searchResult.movies.length; i++) {
-				const movie = store.searchResult.movies[i];
-				
+		voteAdjust(item){
+			let vote = parseInt(Math.ceil(item / 2));
+			if (vote < 1) {
+				vote = 1;
 			}
+			else if(vote > 5){
+				vote = 5;
+				console.log('entrato in maggiore di 5')
+			}
+			return vote;
 		}
 	}
 }
@@ -33,28 +37,30 @@ export default {
 
 			<div>
 				<h3>Series</h3>
-				<template  v-for="(movie, i) in store.searchResult.movies" :key="i">
+				<template  v-for="movie in store.searchResult.movies">
 
 					<CardComponent
 					:title="movie.title"
 					:originalTitle="movie.original_title"
 					:lang="movie.original_language"
-					:rankingVote="movie.vote_average"
-					:imgUrl="movie.poster_path">
+					:rankingVote="voteAdjust(movie.vote_average)"
+					:imgUrl="movie.poster_path"
+					:starQty="voteAdjust(movie.vote_average)">
 					</CardComponent>
 					
 				</template>
 			</div>
 			<div>
 				<h3>Movies</h3>
-				<template  v-for="(serie, j) in store.searchResult.series" :key="j">
+				<template  v-for="serie in store.searchResult.series">
 
 					<CardComponent
 					:title="serie.name"
 					:originalTitle="serie.original_name"
 					:lang="serie.original_language"
-					:rankingVote="serie.vote_average"
-					:imgUrl="serie.poster_path">
+					:rankingVote="voteAdjust(serie.vote_average)"
+					:imgUrl="serie.poster_path"
+					:starQty="voteAdjust(serie.vote_average)">
 					</CardComponent>
 
 				</template>

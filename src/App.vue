@@ -39,22 +39,9 @@ export default {
 <template>
 
 
-<header>
-	<section>
-		<h1>Boolflix</h1>
-	</section>
-	<section>
+	<HeaderComponent @searchMovie="searchContent()"></HeaderComponent>
 
-		<input type="text" v-model="store.userSearchInput">
-		<button @click="searchContent()">
-			Search
-		</button>
-		
-	</section>
-</header>
-
-<MainComponent>
-</MainComponent>
+	<MainComponent></MainComponent>
 
 	
 
@@ -62,6 +49,14 @@ export default {
 
 <style lang="scss">
 @use './assets/scss/main.scss' as *;
+
+
+body{
+	background: rgb(46,45,45);
+	background: linear-gradient(0deg, rgba(46,45,45,1) 85%, rgba(0,0,0,1) 95%);
+	background-repeat: no-repeat;
+	
+}
 
 
 </style>

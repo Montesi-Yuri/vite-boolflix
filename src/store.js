@@ -2,5 +2,8 @@ import { reactive } from 'vue'
 
 export const store = reactive({
     userSearchInput:'',
-    searchResult:[],
+    searchResult:{
+        movies:'',
+        series:'',
+    }
 });
