@@ -1,6 +1,6 @@
 <script>
 import CardComponent from '../components/CardComponent.vue';
-
+import TrendingComponent from '../components/TrendingComponent.vue';
  
 import { store } from '../store.js';
 
@@ -12,7 +12,7 @@ export default {
 	},
 	components:{
 		CardComponent,
-		
+		TrendingComponent
 	},
 	methods:{
 		voteAdjust(item){
@@ -28,11 +28,9 @@ export default {
 		},
 		showInfo(id){
 			store.displayInfo = id;
-
 		},
 		hideInfo(){
 			store.displayInfo = '';
-
 		}
 	}
 }
@@ -40,17 +38,16 @@ export default {
 </script>
 
 <template>
-	<div class="container">
-		<div class="cards-container">
 
-			<div>
-				<h3>Series</h3>
+	<TrendingComponent></TrendingComponent>
+
+		<!-- <div>
 				<template  v-for="(movie, i) in store.searchResult.movies" :key="i">
 
 					<CardComponent @mouseenter="showInfo(movie.id)" @mouseleave="hideInfo()"
 					:id="movie.id"
 					:title="movie.title"
-					:originalTitle="movie.original_title"
+					:overview="movie.overview"
 					:lang="movie.original_language"
 					:rankingVote="voteAdjust(movie.vote_average)"
 					:imgUrl="movie.poster_path"
@@ -60,12 +57,12 @@ export default {
 				</template>
 			</div>
 			<div>
-				<h3>Movies</h3>
 				<template  v-for="serie in store.searchResult.series">
 
 					<CardComponent @mouseenter="showInfo(serie.id)" @mouseleave="hideInfo()"
+					:id="serie.id"
 					:title="serie.name"
-					:originalTitle="serie.original_name"
+					:overview="serie.overview"
 					:lang="serie.original_language"
 					:rankingVote="voteAdjust(serie.vote_average)"
 					:imgUrl="serie.poster_path"
@@ -73,27 +70,12 @@ export default {
 					</CardComponent>
 
 				</template>
-			</div>
-		</div>
-	</div>
+			</div> -->
+			 
+	
 </template>
 
 <style lang="scss" scoped>
+@use '../assets/scss/main.scss' as *;
 
-.cards-container{
-	
-	> div{
-		display: flex;
-		flex-wrap: wrap;
-
-
-		h3{
-			width: 100%;
-		}
-	}
-
-	.single-card{
-		width: 300px;
-	}
-}
 </style>

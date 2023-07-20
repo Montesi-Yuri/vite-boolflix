@@ -31,7 +31,8 @@ export default {
 			});
 		
 		}
-	}
+	},
+	
 }
 
 </script>
@@ -39,6 +40,12 @@ export default {
 <template>
 
 	<HeaderComponent @searchMovie="searchContent()"></HeaderComponent>
+
+	<div class="text-red-500 text-center text-2xl my-20" v-show="store.searchResult.movies && store.searchResult.series == '' ">
+		<h2>
+			No results for your research
+		</h2>
+	</div>
 
 	<MainComponent></MainComponent>
 
@@ -48,11 +55,11 @@ export default {
 @use './assets/scss/main.scss' as *;
 
 
-body{
+#app{
 	background: rgb(46,45,45);
 	background: linear-gradient(0deg, rgba(46,45,45,1) 85%, rgba(0,0,0,1) 95%);
 	background-repeat: no-repeat;
-	
+	min-height: 100vh;
 }
 
 

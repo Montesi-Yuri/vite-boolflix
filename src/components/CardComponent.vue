@@ -19,6 +19,7 @@ export default {
 		rankingVote: Number,
 		imgUrl: String,
 		starQty: Number,
+		overview: String,
 	},
 	computed:{
 		fixFlagImg(){
@@ -45,7 +46,7 @@ export default {
 
 <template>
 
-	<div class="single-card">
+	<div class="single-card" :class="store.displayInfo == id ? 'highlight-item' : '' ">
 		
 		<img :src="'https://image.tmdb.org/t/p/w300/' + imgUrl" :alt="title">
 
@@ -54,14 +55,14 @@ export default {
 				{{ id }}
 			</template>
 
-			<h3>
+			<h3 class="text-center text-2xl font-bold">
 				{{ title }}
 			</h3>
-			<h3>
-				{{ originalTitle }}
-			</h3>
-			<div>
-				<span class="font-bold">
+			<h4 class="text-center text-sm">
+				{{ overview }}
+			</h4>
+			<div class="mx-5">
+				<span class="font-bold text-sm">
 					Language:
 				</span>
 				{{ lang.toUpperCase() }}
@@ -69,12 +70,12 @@ export default {
 				:nation="fixFlagImg">
 				</FlagComponent>
 			</div>
-			<div class="flex">
-				<span class="font-bold">
+			<div class="ratings flex mx-5">
+				<span class="font-bold text-sm">
 					Rating:
 				</span>
 				<template v-for="fullStar in starQty">
-					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
+					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 text-yellow-400">
 						<path fill-rule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z" clip-rule="evenodd" />
 					</svg>
 				</template>
@@ -93,14 +94,11 @@ export default {
 @use '../assets/scss/main.scss' as *;
 .single-card{
 	width: 300px;
-	color: salmon;
 	position: relative;
-	margin-bottom: 20px;
+	margin: 10px 10px;
 	
-
 	img{
-		width: 100%;
-		height: 450px;
+		
 	}
 
 	.card-info{
@@ -108,20 +106,26 @@ export default {
 		bottom: 0;
 		left: 0;
 		width: 100%;
-		height: 40%;
+		min-height: 40%;
+		max-height: 100%;
+		overflow-y: auto;
 		background-color: rgba($color: white, $alpha: 0.8);
-
 		> *{
-			padding-bottom: 5px;
+			padding: 5px 0px;
 		}
 		h3{
 		text-align: center;
+	
 		}
 		p{
 			text-align: center;
 		}
 	}
-	
 }
+
+// .highlight-item{
+// 	scale: 150%;
+// 	z-index: 2;
+// }
 
 </style>
