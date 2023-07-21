@@ -73,7 +73,8 @@ export default{
 				:lang="movie.original_language"
 				:rankingVote="voteAdjust(movie.vote_average)"
 				:imgUrl="movie.poster_path"
-				:starQty="voteAdjust(movie.vote_average)">
+				:starQty="voteAdjust(movie.vote_average)"
+                :genresNames="store.genresNames">
 				</CardComponent>
 			</div>
 		</div>

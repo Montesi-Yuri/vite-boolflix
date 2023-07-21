@@ -14,7 +14,6 @@ export default {
 <template>
 
 	<header>
-
 		<h1 class="text-3xl font-bold">Boolflix</h1>
 		<nav>
 			<ul>
@@ -26,19 +25,17 @@ export default {
 				<li><a href="">Search by language</a></li>
 			</ul>
 		</nav>
-	
 		<div class="flex items-center">
 			<label class="px-2">
 				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
 					<path fill-rule="evenodd" d="M9 3.5a5.5 5.5 0 100 11 5.5 5.5 0 000-11zM2 9a7 7 0 1112.452 4.391l3.328 3.329a.75.75 0 11-1.06 1.06l-3.329-3.328A7 7 0 012 9z" clip-rule="evenodd" />
 				</svg>
 			</label>	
-			<input type="text" v-model="store.userSearchInput" placeholder="titles, genres, people, ...">
-			<button class="btn text-red-600" @click="$emit('searchMovie')">
+			<input type="text" class="p-2 rounded-md text-sm" v-model="store.userSearchInput" placeholder="titles, genres, people, ...">
+			<button class="btn text-red-600 ms-5" @click="$emit('searchMovie')">
 				Search
 			</button>
 		</div>
-		
 	</header>
 
 </template>
@@ -57,10 +54,8 @@ header{
 	}
 	nav{
 		margin-left: 0;
-
 		ul{
 			display: flex;
-
 			li{
 				padding: 6px 12px;
 			}
@@ -76,7 +71,5 @@ header{
 		background-color: rgba($color: white, $alpha: 0.1);
 		border-radius: 5px;
 	}
-	
 }
-
 </style>

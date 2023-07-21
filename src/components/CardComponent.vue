@@ -20,6 +20,7 @@ export default {
 		starQty: Number,
 		overview: String,
 		mediaType: String,
+		genresNames: Array
 	},
 	computed:{
 		fixFlagImg(){
@@ -64,6 +65,12 @@ export default {
 			<h4 class="text-center text-sm">
 				{{ overview }}
 			</h4>
+			<div class="genres mx-5">
+				<p class=" font-bold text-md text-red-600">Genre:</p>
+				<span class="text-sm" v-for="singleGenre in store.genresNames">
+					{{ singleGenre + ' - ' }} 
+				</span>
+			</div>
 			<div class="mx-5">
 				<span class="font-bold text-sm">
 					Language:

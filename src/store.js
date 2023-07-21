@@ -12,4 +12,6 @@ export const store = reactive({
     },
     displayInfo: '',
     castArray:'',
+    genres:'',
+    genresNames:[],
 });

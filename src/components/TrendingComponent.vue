@@ -50,6 +50,29 @@ export default{
         hideCast(){
 			store.castArray = ''
 		},
+        getMovieGenres(movieId){
+            axios.get(`https://api.themoviedb.org/3/movie/${movieId}?api_key=5c7e8182494749b2f74b1f98b20d6a99`)
+            .then(response => {
+                store.genres = response.data.genres;
+                for (let i = 0; i < store.genres.length; i++) {
+                    const element = store.genres[i];
+                    store.genresNames.push(element.name);
+                }
+            })
+        },
+        getSerieGenres(serieId){
+            axios.get(`https://api.themoviedb.org/3/tv/${serieId}?api_key=5c7e8182494749b2f74b1f98b20d6a99`)
+            .then(response => {
+                store.genres = response.data.genres;
+                for (let i = 0; i < store.genres.length; i++) {
+                    const element = store.genres[i];
+                    store.genresNames.push(element.name);
+                }
+            })
+        },
+        unfillGenres(){
+			store.genresNames = []
+		},
     }
 }
 </script>
@@ -64,7 +87,7 @@ export default{
         </h3>
         <div class="movies">
             <div v-for="(movie, i) in store.trending.movies" :key="i">
-                <CardComponent @mouseenter="showInfo(movie.id)" @mouseleave="hideInfo(), hideCast()" @castInfo="getCastInfo(movie.id, movie.media_type)"
+                <CardComponent @mouseenter="showInfo(movie.id), getMovieGenres(movie.id)" @mouseleave="hideInfo(), hideCast(), unfillGenres()" @castInfo="getCastInfo(movie.id, movie.media_type)"
                 :id="movie.id"
                 :title="movie.title"
                 :overview="movie.overview"
@@ -81,7 +104,7 @@ export default{
         </h3>
         <div class="series">
             <div v-for="serie in store.trending.series">
-                <CardComponent @mouseenter="showInfo(serie.id)" @mouseleave="hideInfo(), hideCast()" @castInfo="getCastInfo(serie.id, serie.media_type)"
+                <CardComponent @mouseenter="showInfo(serie.id), getSerieGenres(serie.id)" @mouseleave="hideInfo(), hideCast(), unfillGenres()" @castInfo="getCastInfo(serie.id, serie.media_type)"
                 :id="serie.id"
                 :title="serie.name"
                 :overview="serie.overview"
