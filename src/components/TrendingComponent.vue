@@ -42,7 +42,18 @@ export default{
 		},
 		hideInfo(){
 			store.displayInfo = '';
-		}
+		},
+        getCastInfo(movieId){
+			console.log('Id', movieId)
+			axios.get(`https://api.themoviedb.org/3/movie/${movieId}/credits?api_key=5c7e8182494749b2f74b1f98b20d6a99`)
+			.then(response => {
+				store.castArray = response.data.cast;
+				console.log('array cast', store.castArray, typeof store.castArray)
+			});
+		},
+        hideCast(){
+			store.castArray = ''
+		},
     }
 }
 </script>
@@ -53,11 +64,11 @@ export default{
             Trending Now
         </h2>
         <h3 class="text-white text-2xl pt-8">
-                Movies
-            </h3>
+            Movies
+        </h3>
         <div class="movies">
             <div v-for="(movie, i) in store.trending.movies" :key="i">
-                <CardComponent @mouseenter="showInfo(movie.id)" @mouseleave="hideInfo()"
+                <CardComponent @mouseenter="showInfo(movie.id)" @mouseleave="hideInfo(), hideCast()" @castInfo="getCastInfo(movie.id)"
                 :id="movie.id"
                 :title="movie.title"
                 :overview="movie.overview"
@@ -69,8 +80,8 @@ export default{
             </div>
         </div>
         <h3 class="text-white text-2xl pt-8">
-                Series
-            </h3>
+            Series
+        </h3>
         <div class="series">
             <div v-for="serie in store.trending.series">
                 <CardComponent @mouseenter="showInfo(serie.id)" @mouseleave="hideInfo()"

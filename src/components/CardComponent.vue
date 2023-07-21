@@ -1,6 +1,7 @@
 <script>
 import FlagComponent from '../components/FlagComponent.vue';
 import { store } from '../store.js';
+import axios from 'axios';
 
 export default {
 	data() {
@@ -38,17 +39,28 @@ export default {
 			else{
 				return this.lang
 			}
+		},
+		cardImg(){
+			let img = 'https://image.tmdb.org/t/p/w300' + this.imgUrl;
+			if( img == 'https://image.tmdb.org/t/p/w300null'){
+				img = '../assets/img/disappointment.jpg';
+				return new URL(`${img}`, import.meta.url).href
+			}
+			else{
+				return img
+			}
 		}
-	}
+	},
+		
 }
 
 </script>
 
 <template>
 
-	<div class="single-card" :class="store.displayInfo == id ? 'highlight-item' : '' ">
+	<div class="single-card">
 		
-		<img :src="'https://image.tmdb.org/t/p/w300/' + imgUrl" :alt="title">
+		<img :src="cardImg" :alt="title">
 
 		<div class="card-info" v-show="store.displayInfo == id">
 			<template>
@@ -85,6 +97,20 @@ export default {
 					</svg>
 				</template>
 			</div>
+
+			<div class="flex justify-center">
+				<button @click="$emit('castInfo')" class="btn bg-orange-200">Cast</button>
+			</div>
+			<ul>
+				<li v-for="(castMember, i) in store.castArray">
+					<template v-if=" i < 6 ">
+						<p>
+						{{ castMember.name }} - {{ castMember.character }}
+						</p>
+					</template>
+					
+				</li>
+			</ul>
 		</div>
 	</div>
   
@@ -124,10 +150,5 @@ export default {
 		}
 	}
 }
-
-// .highlight-item{
-// 	scale: 150%;
-// 	z-index: 2;
-// }
 
 </style>

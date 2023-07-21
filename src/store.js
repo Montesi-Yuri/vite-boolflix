@@ -11,4 +11,5 @@ export const store = reactive({
         series:''
     },
     displayInfo: '',
+    castArray:'',
 });

@@ -18,7 +18,7 @@ export default {
 		<h1 class="text-3xl font-bold">Boolflix</h1>
 		<nav>
 			<ul>
-				<li><a href="">Home</a></li>
+				<li class="active"><a href="">Home</a></li>
 				<li><a href="">Series</a></li>
 				<li><a href="">Movies</a></li>
 				<li><a href="">New and Popular</a></li>
@@ -34,7 +34,7 @@ export default {
 				</svg>
 			</label>	
 			<input type="text" v-model="store.userSearchInput" placeholder="titles, genres, people, ...">
-			<button class="btn" @click="$emit('searchMovie')">
+			<button class="btn text-red-600" @click="$emit('searchMovie')">
 				Search
 			</button>
 		</div>
@@ -62,7 +62,7 @@ header{
 			display: flex;
 
 			li{
-				margin: 0 10px;
+				padding: 6px 12px;
 			}
 			a{
 				color:white;
@@ -71,9 +71,11 @@ header{
 			}
 		}
 	}
-	i{
-		color: white;
-	} 
+	.active{
+		border-bottom: 1px solid red;
+		background-color: rgba($color: white, $alpha: 0.1);
+		border-radius: 5px;
+	}
 	
 }
 
