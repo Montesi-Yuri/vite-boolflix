@@ -1,8 +1,6 @@
 <script>
 import FlagComponent from '../components/FlagComponent.vue';
 import { store } from '../store.js';
-import axios from 'axios';
-
 export default {
 	data() {
 		return {
@@ -21,6 +19,7 @@ export default {
 		imgUrl: String,
 		starQty: Number,
 		overview: String,
+		mediaType: String,
 	},
 	computed:{
 		fixFlagImg(){
@@ -51,22 +50,14 @@ export default {
 			}
 		}
 	},
-		
 }
-
 </script>
 
 <template>
 
 	<div class="single-card">
-		
 		<img :src="cardImg" :alt="title">
-
 		<div class="card-info" v-show="store.displayInfo == id">
-			<template>
-				{{ id }}
-			</template>
-
 			<h3 class="text-center text-2xl font-bold">
 				{{ title }}
 			</h3>
@@ -97,7 +88,6 @@ export default {
 					</svg>
 				</template>
 			</div>
-
 			<div class="flex justify-center">
 				<button @click="$emit('castInfo')" class="btn bg-orange-200">Cast</button>
 			</div>
@@ -105,10 +95,9 @@ export default {
 				<li v-for="(castMember, i) in store.castArray">
 					<template v-if=" i < 6 ">
 						<p>
-						{{ castMember.name }} - {{ castMember.character }}
+							{{ castMember.name }} - {{ castMember.character }}
 						</p>
 					</template>
-					
 				</li>
 			</ul>
 		</div>
@@ -123,12 +112,10 @@ export default {
 	height: calc(100% - 20px);
 	position: relative;
 	margin: 10px 10px;
-	
 	img{
 		height: 100%;
 		display: block;
 	}
-
 	.card-info{
 		position: absolute;
 		bottom: 0;
@@ -143,12 +130,10 @@ export default {
 		}
 		h3{
 		text-align: center;
-	
 		}
 		p{
 			text-align: center;
 		}
 	}
 }
-
 </style>

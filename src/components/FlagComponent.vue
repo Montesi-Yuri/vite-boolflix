@@ -10,7 +10,6 @@ export default{
         nation: String
     }
 }
-
 </script>
 
 <template>
@@ -19,6 +18,5 @@ export default{
 
 <style lang="scss" scoped>
 @import "/node_modules/flag-icons/css/flag-icons.min.css";
-
 
 </style>

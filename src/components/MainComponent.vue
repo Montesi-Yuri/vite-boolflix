@@ -5,6 +5,7 @@ import TrendingComponent from '../components/TrendingComponent.vue';
 import { store } from '../store.js';
 import axios from 'axios';
 
+import SearchResultComponent from './SearchResultComponent.vue';
 export default {
 	data() {
 		return {
@@ -12,9 +13,10 @@ export default {
 		}
 	},
 	components:{
-		CardComponent,
-		TrendingComponent
-	},
+    CardComponent,
+    TrendingComponent,
+    SearchResultComponent
+},
 	methods:{
 		voteAdjust(item){
 			let vote = parseInt(Math.ceil(item / 2));
@@ -46,7 +48,6 @@ export default {
 		},
 	}
 }
-
 </script>
 
 <template>
@@ -54,47 +55,7 @@ export default {
 	<TrendingComponent v-show="store.searchResult.movies == '' "  >
 	</TrendingComponent>
 
-	<div class="px-10" v-show="store.searchResult.movies != '' ">
-		<h3 class="text-white text-2xl pt-8 my-10">
-				Movies
-			</h3>
-		<template class="flex flex-wrap">
-			<div v-for="(movie, i) in store.searchResult.movies" :key="i">
-
-				<CardComponent @mouseenter="showInfo(movie.id)" @mouseleave="hideInfo(), hideCast()" @castInfo="getCastInfo(movie.id)"
-				:id="movie.id"
-				:title="movie.title"
-				:overview="movie.overview"
-				:lang="movie.original_language"
-				:rankingVote="voteAdjust(movie.vote_average)"
-				:imgUrl="movie.poster_path"
-				:starQty="voteAdjust(movie.vote_average)">
-				</CardComponent>
-				
-			</div>
-		</template>
-	</div>
-	<div class="px-10" v-show="store.searchResult.series != '' ">
-		<h3 class="text-white text-2xl pt-8 my-10">
-            Series
-        </h3>
-		<template class="flex flex-wrap">
-			<div v-for="serie in store.searchResult.series">
-
-				<CardComponent @mouseenter="showInfo(serie.id)" @mouseleave="hideInfo()"
-				:id="serie.id"
-				:title="serie.name"
-				:overview="serie.overview"
-				:lang="serie.original_language"
-				:rankingVote="voteAdjust(serie.vote_average)"
-				:imgUrl="serie.poster_path"
-				:starQty="voteAdjust(serie.vote_average)">
-				</CardComponent>
-
-			</div>
-		</template>
-	</div>
-			 
+	<SearchResultComponent></SearchResultComponent>
 	
 </template>
 

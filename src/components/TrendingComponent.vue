@@ -1,9 +1,7 @@
 <script>
 import CardComponent from '../components/CardComponent.vue';
-
 import { store } from '../store.js';
 import axios from 'axios';
-
 export default{
     data(){
         return{
@@ -17,12 +15,10 @@ export default{
 		axios.get('https://api.themoviedb.org/3/trending/tv/week?api_key=5c7e8182494749b2f74b1f98b20d6a99')
 				.then(response => {
 					store.trending.series = response.data.results;
-					console.log('risultato api trending of the week', store.trending.series);
 			});
 		axios.get('https://api.themoviedb.org/3/trending/movie/week?api_key=5c7e8182494749b2f74b1f98b20d6a99')
 			.then(response => {
 				store.trending.movies = response.data.results;
-				console.log('risultato api trending of the week', store.trending.movies);
 		});
 	},
     methods:{
@@ -43,12 +39,12 @@ export default{
 		hideInfo(){
 			store.displayInfo = '';
 		},
-        getCastInfo(movieId){
-			console.log('Id', movieId)
-			axios.get(`https://api.themoviedb.org/3/movie/${movieId}/credits?api_key=5c7e8182494749b2f74b1f98b20d6a99`)
+        getCastInfo(movieId, mediaType){
+            console.log('trending media type:', mediaType)
+            console.log('trending media id:', movieId)
+			axios.get(`https://api.themoviedb.org/3/${mediaType}/${movieId}/credits?api_key=5c7e8182494749b2f74b1f98b20d6a99`)
 			.then(response => {
 				store.castArray = response.data.cast;
-				console.log('array cast', store.castArray, typeof store.castArray)
 			});
 		},
         hideCast(){
@@ -68,14 +64,15 @@ export default{
         </h3>
         <div class="movies">
             <div v-for="(movie, i) in store.trending.movies" :key="i">
-                <CardComponent @mouseenter="showInfo(movie.id)" @mouseleave="hideInfo(), hideCast()" @castInfo="getCastInfo(movie.id)"
+                <CardComponent @mouseenter="showInfo(movie.id)" @mouseleave="hideInfo(), hideCast()" @castInfo="getCastInfo(movie.id, movie.media_type)"
                 :id="movie.id"
                 :title="movie.title"
                 :overview="movie.overview"
                 :lang="movie.original_language"
                 :rankingVote="voteAdjust(movie.vote_average)"
                 :imgUrl="movie.poster_path"
-                :starQty="voteAdjust(movie.vote_average)">
+                :starQty="voteAdjust(movie.vote_average)"
+                :mediaType="movie.media_type">
                 </CardComponent>
             </div>
         </div>
@@ -84,14 +81,15 @@ export default{
         </h3>
         <div class="series">
             <div v-for="serie in store.trending.series">
-                <CardComponent @mouseenter="showInfo(serie.id)" @mouseleave="hideInfo()"
+                <CardComponent @mouseenter="showInfo(serie.id)" @mouseleave="hideInfo(), hideCast()" @castInfo="getCastInfo(serie.id, serie.media_type)"
                 :id="serie.id"
                 :title="serie.name"
                 :overview="serie.overview"
                 :lang="serie.original_language"
                 :rankingVote="voteAdjust(serie.vote_average)"
                 :imgUrl="serie.poster_path"
-                :starQty="voteAdjust(serie.vote_average)">
+                :starQty="voteAdjust(serie.vote_average)"
+                :mediaType="serie.media_type">
                 </CardComponent>
             </div>
         </div>
@@ -106,7 +104,6 @@ export default{
     display: flex;
     overflow-x: auto;
     margin: 10px 0;
-    
     h3{
         width: 100%;
     }
@@ -115,13 +112,11 @@ export default{
 ::-webkit-scrollbar {
   width: 20px;
 }
-
 /* Track */
 ::-webkit-scrollbar-track {
   box-shadow: inset 0 0 5px grey;
   border-radius: 10px;
 }
-
 /* Handle */
 ::-webkit-scrollbar-thumb {
   background: red;
